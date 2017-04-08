@@ -3,3 +3,7 @@ export const LOGGED_IN = 'LOGGED_IN';
 export const LOGGED_OUT = 'LOGGED_OUT';
 export const LOGGED_ERROR = 'LOGGED_ERROR';
 export const REMEMBER_CHANGE = 'REMEMBER_CHANGE';
+export const USER_REGISTER = 'USER_REGISTER';
+export const USER_REGISTER_FAIL = 'USER_REGISTER_FAIL';
+export const USER_REGISTER_ERROR = 'USER_REGISTER_ERROR';
+

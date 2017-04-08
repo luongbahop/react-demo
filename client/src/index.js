@@ -55,8 +55,9 @@ class App {
   routes() {
     return (
     <Router history={this.state.history}>
-      <Route path="/" component={pages.Login}/>
-      <Route path="login" component={pages.Login} />
+      <Route path="/" component={pages.Auth.Login}/>
+      <Route path="login" component={pages.Auth.Login} />
+      <Route path="register" component={pages.Auth.Register} />
       <Route path="patient" component={pages.PatientList} onEnter={this.parserAuth()}/>
       <Route path="patient/create" component={pages.PatientForm} onEnter={this.parserAuth()}/>
       <Route path="patient/:patientId" component={pages.PatientForm} onEnter={this.parserAuth()}/>

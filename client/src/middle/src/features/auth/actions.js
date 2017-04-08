@@ -30,6 +30,26 @@ function rememberChange(remember) {
   };
 }
 
+function userRegister(patient) {
+    return {
+        type: Types.USER_REGISTER,
+        patient
+    };
+}
+
+function userRegisterFaild(faild) {
+    return {
+        type: Types.USER_REGISTER_FAILD,
+        faild
+    };
+}
+
+function userRegisterError(error) {
+    return {
+        type: Types.USER_REGISTER_ERROR,
+        error
+    };
+}
 //=== ACTIONS LOGIC ===
 function login(params) {
   return (dispatch) => {
@@ -70,6 +90,59 @@ function login(params) {
   }
 }
 
+function register(params) {
+  return (dispatch) => {
+    if (
+      params.fullname === '' || params.fullname === null  
+    ) {
+      dispatch(logginError('Fullname is required'));
+      return;
+    }
+    if (
+      params.username === '' || params.username === null 
+    ) {
+      dispatch(logginError('Username is required'));
+      return;
+    }
+    if (
+      params.password === '' || params.password === null 
+    ) {
+      dispatch(logginError('Password is required'));
+      return;
+    }
+    if (
+      params.password !== params.re_password
+    ) {
+      dispatch(logginError('Re-password is not equal password'));
+      return;
+    }
+
+
+    console.log(params,"params")
+    //insert new user
+    let mappers = [];
+    let url =  ApiUrl.register;
+
+    FetchHelper.postEncode(
+        url,
+        "POST",
+        params,
+        mappers,
+        (res) => {
+            dispatch(userRegister(res));
+        },
+        (faild) => {
+            dispatch(userRegisterFaild(faild));
+        },
+        (error) => {
+            dispatch(userRegisterError(error || null));
+        }
+    );
+
+   
+  }
+}
+
 function logout() {
   return (dispatch) => {
     localStorage.removeItem('auth');
@@ -79,6 +152,7 @@ function logout() {
 
 export default {
   login,
+  register,
   logout,
   rememberChange,
 }

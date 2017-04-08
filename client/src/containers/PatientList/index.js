@@ -7,7 +7,9 @@ import {MuiThemeProvider, Dialog, FontIcon, FlatButton, FloatingActionButton} fr
 /*=== import internal ===*/
 import './styles.scss'; // import styles of list patient page
 import {actions, types} from '../../middle';  // call to actions & types (redux)
-import config from '../../config'; // include the common config
+import {ImageNotFound} from '../../components';
+
+//import config from '../../config'; // include the common config
 
 class PatientList extends Component {
   // constructor: this is function to setup default states & call to the init functions
@@ -18,7 +20,8 @@ class PatientList extends Component {
       patients: [],
       patient: null,
       openMessage: false,
-      message: ''
+      message: '',
+      loading: true
     };
   }
 
@@ -40,6 +43,7 @@ class PatientList extends Component {
     if (patient !== undefined && patient.action !== null) {
         if (patient.action === types.patient.PATIENT_FETCH && patient.list !== null) {
           this.setState({patients: patient.list});
+          this.setState({ loading: false });
         }
 
         if (patient.action === types.patient.PATIENT_DELETE) {
@@ -96,6 +100,7 @@ class PatientList extends Component {
   renderPatientlist(patient) {
     return (
       <Media key={patient._id}>
+        122
         <Media.Left className="p-l-image" align="top"  onClick={() => {this.onToPage('patient/' + patient.patientId)}}>
           <img  width={84} height={84} src={patient.photo} alt=""/>
         </Media.Left>
@@ -210,9 +215,11 @@ class PatientList extends Component {
                   </div>
                   <div className="patient-list">
                     {
-                      this.state.patients.map((patient) => {
-                        return this.renderPatientlist(patient);
-                      })
+                      !this.state.loading ? (
+                        this.state.patients.map((patient) => {
+                          return this.renderPatientlist(patient);
+                        })
+                      ) : (<ImageNotFound />)
                     }
                   </div>
                 </div>

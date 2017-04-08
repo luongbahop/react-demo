@@ -9,6 +9,9 @@ class ApiUrl {
   get login() {
     return this.base + 'auth/login';
   }
+  get register() {
+    return this.base + 'auth';
+  }
 
   //=== patient ===
   get patient() {

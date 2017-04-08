@@ -1,7 +1,5 @@
-import Layout from './Layout';
-import LoginForm from './Login';
+import ImageNotFound from './ImageNotFound';
 
 module.exports = {
-  Layout,
-  LoginForm
+  ImageNotFound
 }

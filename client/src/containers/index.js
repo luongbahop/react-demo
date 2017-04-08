@@ -1,10 +1,10 @@
-import Login from './Login'; // include Login page
+import * as Auth  from './Auth'; // include Auth pages
 import PatientForm from './PatientForm'; // include create patient page
 import PatientList from './PatientList'; // include list patient page
 
 // export the modules
 module.exports = {
-      Login,
+      Auth,
       PatientForm,
       PatientList
 }

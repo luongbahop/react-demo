@@ -5,7 +5,7 @@ import {Grid, Row} from 'react-bootstrap';
 import {MuiThemeProvider, TextField, RaisedButton, Checkbox, Snackbar} from 'material-ui';
 /*=== import internal ===*/
 import './styles.scss'; // import styles of login page
-import {actions, types} from '../../middle'; // call to actions & types (redux)
+import {actions, types} from '../../../middle'; // call to actions & types (redux)
 
 class Login extends Component {
     // constructor: this is function to setup default states & call to the init functions
@@ -80,6 +80,12 @@ class Login extends Component {
          this.onLogin();
       }
   }
+  // onToCreate: this is function to redirect to create patient page
+  onToPage(route) {
+    if (route !== undefined) {
+      this.props.router.push(route);
+    }
+  }
 
   // render: this is function to render all element of login page into dom
   render() {
@@ -119,6 +125,11 @@ class Login extends Component {
                           onChange={(event, value) => {this.onChangeValue('password', value)}}
                           onKeyPress={this.onKeyPress}
                         />
+                    </Row>
+                    <Row>
+                        <p  type="button" onClick={() => {this.onToPage('register')}}>
+                            <a>Register a new account</a>
+                        </p>
                     </Row>
                     <Row>
                         <RaisedButton
